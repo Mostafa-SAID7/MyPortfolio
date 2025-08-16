@@ -1,0 +1,79 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl w-full space-y-8 bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-lg">
+        <h2 class="text-center text-3xl font-extrabold text-gray-900 dark:text-white">@ViewData["Title"]</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Local Login -->
+            <div>
+                <form id="account" method="post" class="space-y-6">
+                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Use a local account to log in</h3>
+                    <hr class="border-gray-300 dark:border-gray-600" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm" role="alert"></div>
+
+                    <div class="relative">
+                        <input asp-for="Input.Email" class="peer w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="name@example.com" autocomplete="username" aria-required="true" />
+                        <label asp-for="Input.Email" class="absolute left-4 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm peer-focus:text-blue-500">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="relative">
+                        <input asp-for="Input.Password" type="password" class="peer w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="password" autocomplete="current-password" aria-required="true" />
+                        <label asp-for="Input.Password" class="absolute left-4 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm peer-focus:text-blue-500">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded" asp-for="Input.RememberMe" />
+                        <label class="ml-2 block text-sm text-gray-700 dark:text-gray-200" asp-for="Input.RememberMe">Remember me</label>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors">Log in</button>
+
+                    <div class="flex flex-col space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                        <a id="forgot-password" asp-page="./ForgotPassword" class="hover:text-blue-500">Forgot your password?</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="hover:text-blue-500">Register as a new user</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="hover:text-blue-500">Resend email confirmation</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- External Login -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Use another service to log in</h3>
+                <hr class="border-gray-300 dark:border-gray-600 mb-4" />
+
+                @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        No external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715" class="text-blue-500 hover:underline">this article</a> to set them up.
+                    </p>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="space-y-3">
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                            <button type="submit" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"
+                                    class="w-full py-3 bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white rounded-lg font-semibold transition-colors">
+                                @provider.DisplayName
+                            </button>
+                        }
+                    </form>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

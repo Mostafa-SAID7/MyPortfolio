@@ -1,0 +1,62 @@
+﻿@model MyPortfolio.Areas.Admin.Controllers.DashboardViewModel
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">Dashboard</h1>
+
+    <!-- Cards (counts) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-blue-500 text-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-lg">Projects</h2>
+            <p class="text-3xl font-bold">@ViewBag.ProjectCount</p>
+        </div>
+        <div class="bg-green-500 text-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-lg">Blogs</h2>
+            <p class="text-3xl font-bold">@ViewBag.BlogCount</p>
+        </div>
+        <div class="bg-yellow-500 text-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-lg">Messages</h2>
+            <p class="text-3xl font-bold">@ViewBag.MessageCount</p>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Recent Activity</h2>
+
+        <!-- Projects -->
+        <h3 class="text-lg font-semibold mb-2 text-gray-600 dark:text-gray-300">Latest Projects</h3>
+        <ul class="mb-6">
+            @foreach (var p in Model.RecentProjects)
+            {
+                <li class="border-b border-gray-200 dark:border-gray-700 py-2">
+                    <span class="font-medium">@p.Title</span>
+                    <span class="text-sm text-gray-500 ml-2">@p.CreatedAt.ToShortDateString()</span>
+                </li>
+            }
+        </ul>
+
+        <!-- Blogs -->
+        <h3 class="text-lg font-semibold mb-2 text-gray-600 dark:text-gray-300">Latest Blogs</h3>
+        <ul class="mb-6">
+            @foreach (var b in Model.RecentBlogs)
+            {
+                <li class="border-b border-gray-200 dark:border-gray-700 py-2">
+                    <span class="font-medium">@b.Title</span>
+                    <span class="text-sm text-gray-500 ml-2">@b.CreatedAt.ToShortDateString()</span>
+                </li>
+            }
+        </ul>
+
+        <!-- Messages -->
+        <h3 class="text-lg font-semibold mb-2 text-gray-600 dark:text-gray-300">Latest Messages</h3>
+        <ul>
+            @foreach (var m in Model.RecentMessages)
+            {
+                <li class="border-b border-gray-200 dark:border-gray-700 py-2">
+                    <span class="font-medium">@m.Name</span> —
+                    <span class="text-sm text-gray-500">@m.CreatedAt.ToShortDateString()</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

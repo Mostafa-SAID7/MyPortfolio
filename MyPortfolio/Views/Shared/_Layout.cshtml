@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <li><a href="/Admin/Dashboard" class="hover:text-blue-600 dark:hover:text-blue-400">Admin</a></li>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Portfolio</title>
+    <link href="~/css/output.css" rel="stylesheet" />
+    <!-- ✅ Load theme preference immediately -->
+    <script>
+        if (
+          localStorage.getItem("theme") === "dark" ||
+          (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+    </script>
+    <!-- ✅ Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Optional: Dark mode + custom config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb', // custom blue
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    @Html.Partial("_Navbar")
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-6 pt-20 py-8">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    @Html.Partial("_Footer")
+
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<!-- Hero Section -->
+<section class="text-center py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+    <h1 class="text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+        Hi, I'm <span class="text-blue-600 dark:text-blue-400">Your Name</span>
+    </h1>
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+        Full Stack Developer | ASP.NET | Tailwind | JavaScript
+    </p>
+    <a href="/Projects"
+       class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition">
+        View My Work
+    </a>
+</section>
+
+<!-- About Me -->
+<section class="container mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">About Me</h2>
+    <p class="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
+        I’m a passionate full stack developer with expertise in building modern web applications
+        using <span class="font-semibold">ASP.NET MVC, TailwindCSS, and JavaScript</span>.
+        I love turning complex problems into simple, beautiful, and intuitive solutions.
+    </p>
+</section>
+
+<!-- Skills / Tech Stack -->
+<section class="bg-gray-100 dark:bg-gray-900 py-16">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-10 text-gray-900 dark:text-white">Skills & Tools</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-2xl">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Backend</h3>
+                <p class="text-gray-600 dark:text-gray-300">ASP.NET MVC, EF Core, SQL Server</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-2xl">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Frontend</h3>
+                <p class="text-gray-600 dark:text-gray-300">Tailwind, JavaScript, React</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-2xl">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">DevOps</h3>
+                <p class="text-gray-600 dark:text-gray-300">Docker, Azure, GitHub Actions</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects Preview -->
+<section class="container mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold mb-10 text-gray-900 dark:text-white">Featured Projects</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden">
+            <img src="/images/portfolio.png" alt="Portfolio Project" class="w-full h-40 object-cover" />
+            <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Portfolio Website</h3>
+                <p class="text-gray-600 dark:text-gray-300">Personal site built with ASP.NET + Tailwind</p>
+                <a href="/Projects" class="text-blue-600 dark:text-blue-400 hover:underline mt-4 inline-block">See More</a>
+            </div>
+        </div>
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden">
+            <img src="/images/shop.png" alt="E-commerce Project" class="w-full h-40 object-cover" />
+            <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">E-commerce App</h3>
+                <p class="text-gray-600 dark:text-gray-300">Full-stack shopping app with payments</p>
+                <a href="/Projects" class="text-blue-600 dark:text-blue-400 hover:underline mt-4 inline-block">See More</a>
+            </div>
+        </div>
+    </div>
+    <div class="mt-8">
+        <a href="/Projects" class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition">
+            View All Projects
+        </a>
+    </div>
+</section>
+
+<!-- Contact Call-To-Action -->
+<section class="bg-blue-600 dark:bg-blue-500 py-16 text-center">
+    <h2 class="text-3xl font-bold text-white mb-4">Let's Work Together</h2>
+    <p class="text-blue-100 max-w-xl mx-auto mb-6">
+        Have a project in mind or want to collaborate? Get in touch and let’s make it happen!
+    </p>
+    <a href="/Contact" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:bg-gray-100 transition">
+        Contact Me
+    </a>
+</section>
