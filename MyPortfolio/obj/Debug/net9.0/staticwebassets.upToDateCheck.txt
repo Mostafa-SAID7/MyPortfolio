@@ -1,0 +1,6 @@
+wwwroot\css\output.css
+wwwroot\css\site.css
+wwwroot\js\site.js
+C:\Users\Mostafa\OneDrive\Desktop\Projects\MyPortfolio\MyPortfolio\wwwroot\css\output.css
+C:\Users\Mostafa\OneDrive\Desktop\Projects\MyPortfolio\MyPortfolio\wwwroot\css\site.css
+C:\Users\Mostafa\OneDrive\Desktop\Projects\MyPortfolio\MyPortfolio\wwwroot\js\site.js

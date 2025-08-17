@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyPortfolio.Areas.Admin.Models;
 using MyPortfolio.Data;
 using MyPortfolio.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MyPortfolio.Areas.Admin.Controllers
 {
@@ -30,58 +33,58 @@ namespace MyPortfolio.Areas.Admin.Controllers
         // POST: Admin/Projects/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Project project)
+        public async Task<IActionResult> Create(Project model)
         {
             if (ModelState.IsValid)
             {
-                project.CreatedAt = DateTime.Now;
-                _context.Projects.Add(project);
-                _context.SaveChanges();
+                _context.Projects.Add(model);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(model);
         }
 
-        // GET: Admin/Projects/Edit/5
-        public IActionResult Edit(int id)
+        // GET: Admin/Projects/Edit/{id}
+        public async Task<IActionResult> Edit(int id)
         {
-            var project = _context.Projects.Find(id);
+            var project = await _context.Projects.FindAsync(id);
             if (project == null) return NotFound();
             return View(project);
         }
 
-        // POST: Admin/Projects/Edit
+        // POST: Admin/Projects/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Project project)
+        public async Task<IActionResult> Edit(int id, Project model)
         {
+            if (id != model.Id) return BadRequest();
             if (ModelState.IsValid)
             {
-                _context.Projects.Update(project);
-                _context.SaveChanges();
+                _context.Update(model);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(model);
         }
 
-        // GET: Admin/Projects/Delete/5
-        public IActionResult Delete(int id)
+        // GET: Admin/Projects/Delete/{id}
+        public async Task<IActionResult> Delete(int id)
         {
-            var project = _context.Projects.Find(id);
+            var project = await _context.Projects.FindAsync(id);
             if (project == null) return NotFound();
             return View(project);
         }
 
-        // POST: Admin/Projects/Delete
-        [HttpPost, ActionName("Delete")]
+        // POST: Admin/Projects/DeleteConfirmed
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var project = _context.Projects.Find(id);
+            var project = await _context.Projects.FindAsync(id);
             if (project == null) return NotFound();
 
             _context.Projects.Remove(project);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

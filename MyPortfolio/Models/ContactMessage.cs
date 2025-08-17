@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,5 +23,4 @@ namespace MyPortfolio.Models
         public DateTime SentAt { get; set; } = DateTime.UtcNow;
         // ✅ Add this property
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    }
-}
+    } }

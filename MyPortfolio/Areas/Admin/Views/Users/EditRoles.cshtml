@@ -1,0 +1,32 @@
+﻿@model MyPortfolio.Areas.Admin.Models.EditRolesViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Edit Roles for @Model.UserEmail</h1>
+
+    <form asp-action="EditRoles" method="post" class="space-y-4">
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            @foreach (var role in Model.Roles)
+            {
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" asp-for="@role.Selected" class="h-5 w-5 text-blue-600 rounded" />
+                    <label class="text-gray-800 dark:text-gray-200">@role.RoleName</label>
+                </div>
+            }
+        </div>
+
+        <button type="submit"
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition mt-4">
+            Save Changes
+        </button>
+
+        <a href="@Url.Action("Index", "Users", new { area = "Admin" })"
+           class="ml-4 px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
+            Cancel
+        </a>
+    </form>
+</div>

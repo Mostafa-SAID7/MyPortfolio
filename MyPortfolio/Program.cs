@@ -4,7 +4,7 @@ using MyPortfolio.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔹 1. Add Database (SQL Server example, update "DefaultConnection" in appsettings.json)
+// 🔹 1. Add Database (SQL Server example)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -16,11 +16,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequireUppercase = true;
 })
-.AddRoles<IdentityRole>() // ✅ support Roles
+.AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // 🔹 3. Add Controllers + Views (MVC with Razor)
 builder.Services.AddControllersWithViews();
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 
@@ -58,6 +59,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     await SeedAdminUserAsync(services);
 }
+
 app.Run();
 
 
@@ -73,13 +75,11 @@ async Task SeedAdminUserAsync(IServiceProvider services)
     string adminEmail = "m.ssaid356@gmail.com";
     string adminPassword = "Memo@3560";
 
-    // Create Admin Role if not exists
     if (!await roleManager.RoleExistsAsync(adminRole))
     {
         await roleManager.CreateAsync(new IdentityRole(adminRole));
     }
 
-    // Create Admin User if not exists
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
     if (adminUser == null)
     {
@@ -90,7 +90,6 @@ async Task SeedAdminUserAsync(IServiceProvider services)
             EmailConfirmed = true
         };
         var result = await userManager.CreateAsync(adminUser, adminPassword);
-
         if (result.Succeeded)
         {
             await userManager.AddToRoleAsync(adminUser, adminRole);

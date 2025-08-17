@@ -1,6 +1,7 @@
-﻿@{
-    Layout = null;
-}
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -8,20 +9,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Admin Panel</title>
 
-    <!-- ✅ Tailwind CDN -->
+    <!-- ✅ Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Dark Mode Config -->
+    <!-- Optional: Dark mode + custom config -->
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb'
+                        primary: '#2563eb', // custom blue
                     }
                 }
             }
+        }
+
+        // Load theme preference immediately
+        if (
+            localStorage.getItem("theme") === "dark" ||
+            (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
         }
     </script>
 </head>
@@ -34,28 +45,33 @@
                 Admin Panel
             </div>
             <nav class="flex-1 px-4 space-y-2">
-                <a href="/Admin" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition">
+                <a href="/Admin" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "bg-primary text-white" : "")">
                     Dashboard
                 </a>
-                <a href="/Admin/Projects" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition">
+                <a href="/Admin/Projects" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition @(ViewContext.RouteData.Values["controller"]?.ToString() == "Projects" ? "bg-primary text-white" : "")">
                     Projects
                 </a>
-                <a href="/Admin/Blog" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition">
+                <a href="/Admin/BlogPosts" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition @(ViewContext.RouteData.Values["controller"]?.ToString() == "BlogPosts" ? "bg-primary text-white" : "")">
                     Blog
                 </a>
-                <a href="/Admin/Contact" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition">
+                <a href="/Admin/ContactMessages" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition @(ViewContext.RouteData.Values["controller"]?.ToString() == "ContactMessages" ? "bg-primary text-white" : "")">
                     Messages
                 </a>
-                <a href="/Admin/Users" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition">
+                <a href="/Admin/Users" class="block px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition @(ViewContext.RouteData.Values["controller"]?.ToString() == "Users" ? "bg-primary text-white" : "")">
                     Users & Roles
                 </a>
             </nav>
+
+            <!-- Logout -->
             <div class="p-4 border-t dark:border-gray-700">
-                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit" class="w-full px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-                        Logout
-                    </button>
-                </form>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="w-full px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                            Logout
+                        </button>
+                    </form>
+                }
             </div>
         </aside>
 

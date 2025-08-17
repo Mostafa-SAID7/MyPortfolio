@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,5 +26,6 @@ namespace MyPortfolio.Models
         public string? ImageUrl { get; set; }
         // ✅ Add this property
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
     }
 }

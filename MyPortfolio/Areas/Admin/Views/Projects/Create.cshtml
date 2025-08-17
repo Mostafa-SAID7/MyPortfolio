@@ -1,31 +1,25 @@
 ﻿@model MyPortfolio.Models.Project
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 
-<h2 class="text-2xl font-bold mb-6">Create New Project</h2>
+<h1 class="text-2xl font-bold mb-6">Add Project</h1>
 
-<form asp-action="Create" method="post" class="space-y-4 max-w-lg">
+<form asp-action="Create" method="post" class="space-y-4">
     <div>
-        <label class="block font-medium">Title</label>
-        <input asp-for="Title" class="w-full border rounded p-2" />
-        <span asp-validation-for="Title" class="text-red-500 text-sm"></span>
+        <label class="block mb-1">Title</label>
+        <input asp-for="Title" class="w-full p-2 border rounded" />
+        <span asp-validation-for="Title" class="text-red-500"></span>
     </div>
-
     <div>
-        <label class="block font-medium">Description</label>
-        <textarea asp-for="Description" class="w-full border rounded p-2"></textarea>
-        <span asp-validation-for="Description" class="text-red-500 text-sm"></span>
+        <label class="block mb-1">Description</label>
+        <textarea asp-for="Description" class="w-full p-2 border rounded"></textarea>
+        <span asp-validation-for="Description" class="text-red-500"></span>
     </div>
-
-    <div>
-        <label class="block font-medium">Image URL</label>
-        <input asp-for="ImageUrl" class="w-full border rounded p-2" />
-        <span asp-validation-for="ImageUrl" class="text-red-500 text-sm"></span>
-    </div>
-
-    <button type="submit"
-            class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-        Save
-    </button>
-    <a asp-action="Index" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-        Cancel
-    </a>
+    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Create</button>
+    <a asp-action="Index" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</a>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

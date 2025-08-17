@@ -1,17 +1,15 @@
-﻿@model MyPortfolio.Models.ContactMessage
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model MyPortfolio.Models.ContactMessage
 
-<h2 class="text-2xl font-bold mb-6">Message Details</h2>
+<h1 class="text-2xl font-bold mb-6">Message Details</h1>
 
-<div class="border rounded p-6 bg-white shadow max-w-2xl">
+<div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow space-y-2">
     <p><strong>Name:</strong> @Model.Name</p>
     <p><strong>Email:</strong> @Model.Email</p>
-    <p><strong>Subject:</strong> @Model.Subject</p>
-    <p><strong>Message:</strong></p>
-    <p class="whitespace-pre-line border rounded bg-gray-50 p-3 mt-2">@Model.Message</p>
-    <p class="mt-3 text-sm text-gray-500">Received: @Model.CreatedAt</p>
+    <p><strong>Message:</strong> @Model.Message</p>
+    <p><strong>Received At:</strong> @Model.CreatedAt.ToShortDateString()</p>
 </div>
 
-<a asp-action="Index"
-   class="mt-6 inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-    Back to Messages
-</a>
+<a asp-action="Index" class="mt-4 inline-block px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back</a>

@@ -6,6 +6,7 @@ namespace MyPortfolio.Controllers
 {
     public class ContactController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public ContactController(ApplicationDbContext context)
@@ -14,10 +15,12 @@ namespace MyPortfolio.Controllers
         }
 
         // GET: /Contact
+
         public IActionResult Index()
         {
             return View();
         }
+
 
         // POST: /Contact
         [HttpPost]
@@ -35,5 +38,6 @@ namespace MyPortfolio.Controllers
 
             return View();
         }
+
     }
 }

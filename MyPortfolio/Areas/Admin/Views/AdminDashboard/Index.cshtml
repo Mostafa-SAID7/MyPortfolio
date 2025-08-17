@@ -1,4 +1,7 @@
-﻿@model MyPortfolio.Areas.Admin.Controllers.DashboardViewModel
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model MyPortfolio.Areas.Admin.Controllers.DashboardViewModel
 
 <div class="p-6">
     <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">Dashboard</h1>
@@ -8,14 +11,23 @@
         <div class="bg-blue-500 text-white p-6 rounded-2xl shadow-md">
             <h2 class="text-lg">Projects</h2>
             <p class="text-3xl font-bold">@ViewBag.ProjectCount</p>
+            <a href="/Admin/Projects/Create" class="mt-4 inline-block bg-white text-blue-500 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                + Add Project
+            </a>
         </div>
         <div class="bg-green-500 text-white p-6 rounded-2xl shadow-md">
             <h2 class="text-lg">Blogs</h2>
             <p class="text-3xl font-bold">@ViewBag.BlogCount</p>
+            <a href="/Admin/BlogPosts/Create" class="mt-4 inline-block bg-white text-green-500 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                + Add Blog
+            </a>
         </div>
         <div class="bg-yellow-500 text-white p-6 rounded-2xl shadow-md">
             <h2 class="text-lg">Messages</h2>
             <p class="text-3xl font-bold">@ViewBag.MessageCount</p>
+            <a href="/Admin/ContactMessages/Create" class="mt-4 inline-block bg-white text-yellow-500 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                + Add Message
+            </a>
         </div>
     </div>
 
@@ -28,9 +40,10 @@
         <ul class="mb-6">
             @foreach (var p in Model.RecentProjects)
             {
-                <li class="border-b border-gray-200 dark:border-gray-700 py-2">
+                <li class="border-b border-gray-200 dark:border-gray-700 py-2 flex justify-between items-center">
                     <span class="font-medium">@p.Title</span>
                     <span class="text-sm text-gray-500 ml-2">@p.CreatedAt.ToShortDateString()</span>
+                    <a href="/Admin/Projects/Edit/@p.Id" class="text-blue-500 hover:underline ml-4">Edit</a>
                 </li>
             }
         </ul>
@@ -40,9 +53,10 @@
         <ul class="mb-6">
             @foreach (var b in Model.RecentBlogs)
             {
-                <li class="border-b border-gray-200 dark:border-gray-700 py-2">
+                <li class="border-b border-gray-200 dark:border-gray-700 py-2 flex justify-between items-center">
                     <span class="font-medium">@b.Title</span>
                     <span class="text-sm text-gray-500 ml-2">@b.CreatedAt.ToShortDateString()</span>
+                    <a href="/Admin/BlogPosts/Edit/@b.Id" class="text-green-500 hover:underline ml-4">Edit</a>
                 </li>
             }
         </ul>
@@ -52,9 +66,10 @@
         <ul>
             @foreach (var m in Model.RecentMessages)
             {
-                <li class="border-b border-gray-200 dark:border-gray-700 py-2">
-                    <span class="font-medium">@m.Name</span> —
+                <li class="border-b border-gray-200 dark:border-gray-700 py-2 flex justify-between items-center">
+                    <span class="font-medium">@m.Name</span>
                     <span class="text-sm text-gray-500">@m.CreatedAt.ToShortDateString()</span>
+                    <a href="/Admin/ContactMessages/Edit/@m.Id" class="text-yellow-500 hover:underline ml-4">Edit</a>
                 </li>
             }
         </ul>

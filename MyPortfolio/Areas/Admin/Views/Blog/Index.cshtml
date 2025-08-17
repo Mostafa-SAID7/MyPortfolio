@@ -1,37 +1,29 @@
-﻿@model IEnumerable<MyPortfolio.Models.BlogPost>
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model IEnumerable<MyPortfolio.Models.BlogPost>
 
-<h2 class="text-2xl font-bold mb-6">Manage Blog Posts</h2>
+<h1 class="text-2xl font-bold mb-6">Blogs</h1>
 
-<a asp-action="Create"
-   class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-    + New Blog Post
-</a>
+<a href="@Url.Action("Create")" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Create New Blog</a>
 
-<table class="w-full mt-6 border border-gray-200 rounded-lg shadow-sm">
-    <thead class="bg-gray-100">
+<table class="min-w-full bg-white dark:bg-gray-800 mt-4 rounded-lg shadow overflow-hidden">
+    <thead class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
         <tr>
-            <th class="p-3 text-left">Title</th>
-            <th class="p-3 text-left">Author</th>
-            <th class="p-3 text-left">Created</th>
-            <th class="p-3 text-left">Actions</th>
+            <th class="px-4 py-2 text-left">Title</th>
+            <th class="px-4 py-2">Created At</th>
+            <th class="px-4 py-2">Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var post in Model)
+        @foreach (var blog in Model)
         {
-            <tr class="border-t hover:bg-gray-50">
-                <td class="p-3">@post.Title</td>
-                <td class="p-3">@post.Author</td>
-                <td class="p-3">@post.CreatedAt.ToShortDateString()</td>
-                <td class="p-3 space-x-2">
-                    <a asp-action="Edit" asp-route-id="@post.Id"
-                       class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                        Edit
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@post.Id"
-                       class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
-                        Delete
-                    </a>
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+                <td class="px-4 py-2">@blog.Title</td>
+                <td class="px-4 py-2 text-center">@blog.CreatedAt.ToShortDateString()</td>
+                <td class="px-4 py-2 text-center space-x-2">
+                    <a href="@Url.Action("Edit", new { id = blog.Id })" class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = blog.Id })" class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</a>
                 </td>
             </tr>
         }

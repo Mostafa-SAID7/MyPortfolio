@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 using MyPortfolio.Data;
 using MyPortfolio.Models;
@@ -7,6 +8,7 @@ namespace MyPortfolio.Controllers
 {
     public class BlogController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public BlogController(ApplicationDbContext context)
@@ -32,6 +34,7 @@ namespace MyPortfolio.Controllers
             if (post == null) return NotFound();
 
             return View(post);
+
         }
     }
 }
